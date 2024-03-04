@@ -73,6 +73,8 @@
 
                             <button type="button" data-index="{{ product.id }}" class="btn btn-secondary update-cart" >Update</button>
 
+                            <button type="button" data-index="{{ product.id }}" class="btn btn-danger delete-product" >Remove</button>
+
                         </center>
                     
                     </div>
@@ -81,6 +83,7 @@
             </div>
 
             {% endfor %}
+            <strong>Total: </strong>
         {% else %}
            There is nothing in your Cart...
         {% endif %}
@@ -91,32 +94,67 @@
 
 <script>
 
+    // UPDATE CART
     // Check if button press
     $(document).on('click', '.update-cart', function(e){
 
-    e.preventDefault();
-    // grab the product id
-    var productid = $(this).data('index');
-    
-    $.ajax({
-        type: 'POST',
-        url: '{% url "cart_update" %}',
-        data: {
-            product_id: $(this).data('index'),
-            product_qty: $('#select' + productid + ' option:selected').text(),
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            action: 'post'
+        e.preventDefault();
+        // grab the product id
+        var productid = $(this).data('index');
+        
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_update" %}',
+            data: {
+                product_id: $(this).data('index'),
+                product_qty: $('#select' + productid + ' option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
             },
 
-        success: function(json){
-            //console.log(json)
-            //document.getElementById("cart_quantity").textContent = json.qty
+            success: function(json){
+                //console.log(json)
+                //document.getElementById("cart_quantity").textContent = json.qty
 
-            location.reload();
+                location.reload();
 
             },
 
-        error: function(xhr, errmsg, err){
+                error: function(xhr, errmsg, err){
+
+                }
+        });
+
+    })
+
+
+
+    // DELETE ITEM (PRODUCT) FROM CART
+    // Check if button press
+    $(document).on('click', '.delete-product', function(e){
+
+        e.preventDefault();
+        // grab the product id
+        //var productid = $(this).data('index');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_delete" %}',
+            data: {
+                product_id: $(this).data('index'),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+
+            success: function(json){
+                //console.log(json)
+                //document.getElementById("cart_quantity").textContent = json.qty
+
+                location.reload();
+
+            },
+
+            error: function(xhr, errmsg, err){
 
             }
         });
