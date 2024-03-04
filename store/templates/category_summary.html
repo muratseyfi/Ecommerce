@@ -13,10 +13,10 @@
     
     <div class="container">
         <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 mt-5">
                     
                     {% for category in categories %}
-                        <h3><a href="{% url 'category' category %}">{{ category }}</a></h3>
+                        <h3><a href="{% url 'category' category %}" class="text-black" style="text-decoration: none;">{{ category }}</a></h3>
                         <hr>
                     {% endfor %}
                         
