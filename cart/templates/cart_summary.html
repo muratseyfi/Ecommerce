@@ -12,7 +12,7 @@
         </div>
     </header>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
 
         {% if cart_products %}
         
@@ -83,7 +83,11 @@
             </div>
 
             {% endfor %}
-            <strong>Total: </strong>
+            <center>
+                <h3>Total: ${{ totals }}</h3>
+                <br>
+            </center>
+            
         {% else %}
            There is nothing in your Cart...
         {% endif %}
