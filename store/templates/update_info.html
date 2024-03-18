@@ -14,10 +14,18 @@
     <div class="container">
         <div class="row">
                 <div class="col-md-6 mt-5 mb-5 mx-auto">
+                    <strong>Biling Information</strong>
+                    <hr>
                     <form method="POST" action="{% url 'update_info' %}">
                         {% csrf_token %}
                         
                         {{ form.as_p }}
+
+                        <br>
+
+                        <strong>Shipping Information</strong>
+                        <hr>
+                        {{ shipping_form.as_p }}
                         <br>
                         <button type="submit" class="btn btn-secondary">Update Info</button>
                     </form>
